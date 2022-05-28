@@ -1,0 +1,12 @@
+.App {
+  text-align: center;
+  
+}
+::-webkit-scrollbar {
+  display: none;
+  }
+
+.row {
+  display: flex;
+  justify-content: center;
+}
