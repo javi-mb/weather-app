@@ -2,7 +2,12 @@
   margin: 20px;
   width: 18rem;
   background: rgba(46, 42, 42, 0.2);
- 
+  backdrop-filter: blur(1px);
+}
+
+.card:hover{
+  box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
+  transform: translateY(-3%);
 }
 
 a{

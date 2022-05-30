@@ -1,5 +1,4 @@
-## Henry Weather
-
+## Weather App
 
 ### Ejercitación
 
@@ -8,10 +7,10 @@ En este `homework` vamos a utilizar `react-router` para poder tener más de una 
 Vamos a utilizar el código que hicimos en el `homework` anterior. Si no lo terminaste, no te preocupes, en `src` dejamos todo el código para tener el proyecto funcionando.
 
 Cuando terminemos este `homework`, vamos a tener tres rutas que podremos navegar:
- - **"/"**: El home, acá vamos a ver lo mismo que veiamos.
- - **"/ciudad/{ciudadId}/"**: en esta ruta, vamos a tener información más detallada sobre el clima de una ciudad en particular, notese que usamos el ID de una ciudad para identificarla y no el nombre.
- - **"/about"**: Tu oportunidad de poner tu nombre y explicar un poco de que va la `weatherApp`.
 
+- **"/"**: El home, acá vamos a ver lo mismo que veiamos.
+- **"/ciudad/{ciudadId}/"**: en esta ruta, vamos a tener información más detallada sobre el clima de una ciudad en particular, notese que usamos el ID de una ciudad para identificarla y no el nombre.
+- **"/about"**: Tu oportunidad de poner tu nombre y explicar un poco de que va la `weatherApp`.
 
 #### Comenzamos el Enrutado de nuestra aplicacion.
 
@@ -34,6 +33,7 @@ Vamos a tener que instalar `react-router-dom`. Para eso hacemos:
 ```shell
 npm install --save react-router-dom
 ```
+
 Cómo sabemos, lo primero que necesitamos es elegir un Wrapper.
 
 Para ello debemos importar `BrowserRouter` del paquete recién agregado `react-router-dom`:
@@ -59,32 +59,38 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
+
 #### Modificando el NavBar
 
 Ahora que ya hemos preparado nuestra App para usar router, vamos a agregar los links necesarios en nuestro `<Nav />`. Para ello notar que es necesario primero importar `Link` desde `react-router-dom`. (Recordar de importar el componente About para poder utilizarlo)
 
 ```js
 //Nav.js
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-function Nav({onSearch}) {
+function Nav({ onSearch }) {
   return (
     <nav className="navbar navbar-dark bg-dark">
-      <Link to='/'>
+      <Link to="/">
         <span className="navbar-brand">
-          <img id="logoHenry" src={Logo} width="30" height="30" className="d-inline-block align-top" alt="" />
+          <img
+            id="logoHenry"
+            src={Logo}
+            width="30"
+            height="30"
+            className="d-inline-block align-top"
+            alt=""
+          />
           Henry - Weather App
         </span>
       </Link>
-      <Link to='/about'>
+      <Link to="/about">
         <span>About</span>
       </Link>
-        <SearchBar
-          onSearch={onSearch}
-        />
+      <SearchBar onSearch={onSearch} />
     </nav>
   );
-};
+}
 ```
 
 #### <Route />
@@ -130,7 +136,6 @@ Esté lugar sería la raíz del árbol de Componentes, por lo tanto, acá tenemo
 
 Ahora vos tenes que cambiar el código para envolver `Cards` con un Componente `<Route />`. Fijate que Cards recibe props!
 
-
 #### Links a cada Ciudad
 
 Bien, si llegaste hasta acá, ya tenemos una SPA con dos links, el home y about, funcionales!
@@ -157,7 +162,6 @@ Vamos a poner ese Link en el título de cada Card (Recuerden de importar Link de
 Bien, ahora necesitamos una prop más! necesitamos el `id` de cada ciudad.
 Ahora tenes que pasarle ese prop al Componente Card. El Compontente que invoca a `Card` es `<Cards />`. Agrega una nueva prop y pasale el id de cada ciudad.
 
-
 #### Ciudad
 
 Bien, ya tenemos la ruta, ahora necesitamos un componente nuevo donde mostrar la info más detallada de la ciudad.
@@ -167,22 +171,22 @@ Para eso vamos a usar el Componente `Ciudad`:
 ```js
 import React from "react";
 
-export default function Ciudad({city}) {
-    return (
-        <div className="ciudad">
-                <div className="container">
-                    <h2>{city.name}</h2>
-                    <div className="info">
-                        <div>Temperatura: {city.temp} ºC</div>
-                        <div>Clima: {city.weather}</div>
-                        <div>Viento: {city.wind} km/h</div>
-                        <div>Cantidad de nubes: {city.clouds}</div>
-                        <div>Latitud: {city.latitud}º</div>
-                        <div>Longitud: {city.longitud}º</div>
-                    </div>
-            </div>
+export default function Ciudad({ city }) {
+  return (
+    <div className="ciudad">
+      <div className="container">
+        <h2>{city.name}</h2>
+        <div className="info">
+          <div>Temperatura: {city.temp} ºC</div>
+          <div>Clima: {city.weather}</div>
+          <div>Viento: {city.wind} km/h</div>
+          <div>Cantidad de nubes: {city.clouds}</div>
+          <div>Latitud: {city.latitud}º</div>
+          <div>Longitud: {city.longitud}º</div>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 ```
 
@@ -212,16 +216,17 @@ Por último, tenemos que pasarle los datos de la ciudad (que ya tenemos) al comp
 Ya tenemos una lista de ciudad, por lo tanto, podemos usar el ciudadId del parámetro para filtrar la ciudad que queremos.
 
 ```js
-cities.filter(c => c.id === parseInt(match.params.ciudadId))
+cities.filter((c) => c.id === parseInt(match.params.ciudadId));
 ```
 
 El filter nos devuelve un arreglo, que puede tener uno o cero elementos. Por lo tanto, van a tener que modificar `Ciudad.jsx` controlar esto. Si hay un elemento, voy a ponerlo en `ciudad`. Y si cero, debería mostrar una leyenda que diga: "Esta ciudad no se encuentra en la lista".
 
-*Pueden utilizar la función onFilter que se encuentra ya definida en el archivo App.js*
+_Pueden utilizar la función onFilter que se encuentra ya definida en el archivo App.js_
 
 ```js
 <Route
-  exact path='/ciudad/:ciudadId'
-  render={({match}) => <Ciudad city={onFilter(match.params.ciudadId)}/>}
+  exact
+  path="/ciudad/:ciudadId"
+  render={({ match }) => <Ciudad city={onFilter(match.params.ciudadId)} />}
 />
 ```

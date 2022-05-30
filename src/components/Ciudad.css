@@ -7,6 +7,11 @@
     padding: 0;
 }
 
+.container-info{
+  backdrop-filter: blur(1px);
+
+}
+
 .title{
     height: 15%;
     display: flex;
@@ -21,8 +26,8 @@
 
 .atras{
     position: absolute;
-    left: 21%;
-    top: 10%;
+    left: 1%;
+    top: -19%;
     width: 80px;
     height: 25px;
     background-color: rgba(212, 191, 191, 0.5);

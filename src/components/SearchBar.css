@@ -6,7 +6,10 @@
     align-items: center;
     border-radius: 60px;
     padding: 10px 20px;
+    backdrop-filter: blur(1px);
+    margin-top: 20px;
 }
+
 
 .searchBar input {
     background: transparent;
